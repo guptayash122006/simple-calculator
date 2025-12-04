@@ -3,11 +3,11 @@ const buttons = document.querySelectorAll(".button");
 
 // Loop through all buttons
 buttons.forEach(button => {
-    button.addEventListener("click", (ankushitem) => {
-        const value = ankushitem.target.innerText;
+    button.addEventListener("click", (s) => {
+        const value = s.target.innerText;
 
         if (value === "AC") {
-            input.value = "Hello baby";
+            input.value = "Hello";
         }
         else if (value === "back") {
             input.value = input.value.slice(0, -1);
