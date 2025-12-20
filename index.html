@@ -8,13 +8,16 @@
 
     <title>Simple Calculator</title>
 
-    <!-- SmartScreen Safety Metadata -->
-    <meta name="description" content="A simple and safe calculator built using HTML, CSS, and JavaScript. No tracking, no login — clean GitHub Pages project.">
-    <meta name="theme-color" content="#ffffff">
+    <!-- Trust & Safety Metadata -->
+    <meta name="description" content="Simple calculator built using HTML, CSS and JavaScript for learning purposes only. No login, no data collection, no tracking.">
     <meta name="author" content="Yash Gupta">
+    <meta name="theme-color" content="#ffffff">
 
-    <!-- Recommended favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Security & Reputation Signals -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';">
+
+    <!-- Favicon (ONLY if file exists) -->
+    <!-- <link rel="icon" type="image/png" href="favicon.png"> -->
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -25,13 +28,13 @@
     <div class="calculator">
         <div class="container">
             <div class="row">
-                <input class="input" type="text" />
+                <input class="input" type="text" readonly />
             </div>
 
             <div class="row">
                 <button class="button">AC</button>
                 <button class="button">%</button>
-                <button class="button">back</button>
+                <button class="button">Back</button>
                 <button class="button">/</button>
             </div>
 
@@ -66,7 +69,6 @@
     </div>
 
     <script src="script.js"></script>
-
 </body>
 
 </html>
