@@ -1,26 +1,54 @@
 const input = document.querySelector(".input");
 const buttons = document.querySelectorAll(".button");
 
+let expression = "";
+
 // Loop through all buttons
 buttons.forEach(button => {
-    button.addEventListener("click", (s) => {
-        const value = s.target.innerText;
+    button.addEventListener("click", () => {
+        const value = button.innerText;
 
+        // Clear all
         if (value === "AC") {
-            input.value = "Hello";
+            expression = "";
+            input.value = "";
         }
-        else if (value === "back") {
-            input.value = input.value.slice(0, -1);
+
+        // Backspace
+        else if (value === "Back") {
+            expression = expression.slice(0, -1);
+            input.value = expression;
         }
+
+        // Calculate result
         else if (value === "=") {
             try {
-                input.value = eval(input.value);
-            } catch {
+                if (expression === "") return;
+                const result = Function("return " + expression)();
+                expression = result.toString();
+                input.value = expression;
+            } catch (error) {
                 input.value = "Error";
+                expression = "";
             }
         }
+
+        // Prevent multiple operators
+        else if (isOperator(value)) {
+            if (expression === "" || isOperator(expression.slice(-1))) return;
+            expression += value;
+            input.value = expression;
+        }
+
+        // Numbers & decimal
         else {
-            input.value += value;
+            expression += value;
+            input.value = expression;
         }
     });
 });
+
+// Helper function
+function isOperator(char) {
+    return ["+", "-", "*", "/", "%"].includes(char);
+}
