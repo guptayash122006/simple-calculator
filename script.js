@@ -1,54 +1,50 @@
 const input = document.querySelector(".input");
 const buttons = document.querySelectorAll(".button");
 
-let expression = "";
+let exp = "";
 
-// Loop through all buttons
-buttons.forEach(button => {
-    button.addEventListener("click", () => {
-        const value = button.innerText;
+buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        const val = btn.innerText;
 
-        // Clear all
-        if (value === "AC") {
-            expression = "";
+        // Clear
+        if (val === "AC") {
+            exp = "";
             input.value = "";
+            return;
         }
 
         // Backspace
-        else if (value === "Back") {
-            expression = expression.slice(0, -1);
-            input.value = expression;
+        if (val === "Back") {
+            exp = exp.slice(0, -1);
+            input.value = exp;
+            return;
         }
 
-        // Calculate result
-        else if (value === "=") {
+        // Calculate
+        if (val === "=") {
             try {
-                if (expression === "") return;
-                const result = Function("return " + expression)();
-                expression = result.toString();
-                input.value = expression;
-            } catch (error) {
+                if (exp === "") return;
+                exp = eval(exp).toString();
+                input.value = exp;
+            } catch {
                 input.value = "Error";
-                expression = "";
+                exp = "";
             }
+            return;
         }
 
-        // Prevent multiple operators
-        else if (isOperator(value)) {
-            if (expression === "" || isOperator(expression.slice(-1))) return;
-            expression += value;
-            input.value = expression;
+        // Prevent invalid operator usage
+        if (isOperator(val)) {
+            if (exp === "" || isOperator(exp.slice(-1))) return;
         }
 
-        // Numbers & decimal
-        else {
-            expression += value;
-            input.value = expression;
-        }
+        // Append value
+        exp += val;
+        input.value = exp;
     });
 });
 
-// Helper function
-function isOperator(char) {
-    return ["+", "-", "*", "/", "%"].includes(char);
+function isOperator(ch) {
+    return "+-*/%".includes(ch);
 }
